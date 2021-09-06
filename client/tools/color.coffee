@@ -74,6 +74,7 @@ for color in colors
         <div className="color" style={backgroundColor: color}/>
       click: (e) -> selectColorOrFill e, color
 
+
 customColor = new ReactiveVar '#808080'
 customColorRef = React.createRef()
 
@@ -100,6 +101,10 @@ defineTool
 
 selectColorOrFill = (e, color) ->
   (if e.shiftKey then selectFill else selectColor) color
+  select_fill_long_press 2000, -> selectFill color
+
+select_fill_long_press = (time, fn, args...) ->
+  setTimeout fn, time, args...
 
 export selectColor = (color, keepTool, skipSelection) ->
   currentColor.set color
